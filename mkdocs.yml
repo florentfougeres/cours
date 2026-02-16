@@ -1,0 +1,41 @@
+site_name: Cours - Florent Fougères
+
+theme:
+  name: material
+  features:
+    - navigation.hide
+    - navigation.instant
+    - navigation.instant.progress
+    - navigation.sections
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.top
+    - navigation.tracking
+    - toc.follow
+    - toc.integrate
+  logo: assets/img/logo.png
+  favicon: assets/img/logo.png
+  icon:
+    repo: fontawesome/brands/github
+
+markdown_extensions:
+  - attr_list
+  - admonition
+  - codehilite
+  - pymdownx.highlight
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.details
+  - md_in_html
+
+plugins:
+  - search:
+      lang: fr
+  - mermaid2
+
+nav:
+  - Accueil: index.md
+  - DuckDB:
+      - Présentation: duckdb/presentation.html
+      - Exercices: duckdb/exercice.md
