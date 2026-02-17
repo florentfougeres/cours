@@ -1,5 +1,8 @@
 site_name: Cours - Florent Fougères
 site_url: https://florentfougeres.github.io/cours/
+repo_name: "cours"
+repo_url: "https://github.com/florentfougeres/cours"
+
 theme:
   name: material
   features:
