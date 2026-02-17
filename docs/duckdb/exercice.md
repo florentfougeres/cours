@@ -1,4 +1,4 @@
-# Traitement de données géospatiales avec Parquet et DuckDB
+# Traitement de données géospatiales DuckDB
 
 ## La présentation
 
