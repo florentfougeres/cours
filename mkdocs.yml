@@ -33,5 +33,5 @@ plugins:
   - mermaid2
 nav:
   - Accueil: index.md
-  - DuckDB: duckdb/exercice.md
+#  - DuckDB: duckdb/exercice.md
 use_directory_urls: false

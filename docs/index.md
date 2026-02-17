@@ -2,4 +2,7 @@
 
 ## 📚 Table des matières
 
-### [DuckDB](duckdb/exercice.md)
+### DuckDB
+
+- [Présentation](duckdb/presentation.md)
+- [Exercice](duckdb/exercice.md)
