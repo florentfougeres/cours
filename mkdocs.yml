@@ -1,4 +1,5 @@
 site_name: Cours - Florent Fougères
+site_url: https://florentfougeres.github.io/cours/
 theme:
   name: material
   features:
