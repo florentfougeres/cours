@@ -2,7 +2,7 @@
 
 ## La présentation
 
-<iframe src="/duckdb/presentation.pdf" width="100%" height="600px"></iframe>
+<iframe src="presentation.pdf" width="100%" height="600px"></iframe>
 
 ## Exercice 1: Introduction avec la CLI DuckDB
 
