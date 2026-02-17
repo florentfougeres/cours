@@ -1,19 +1,18 @@
 ---
 marp: true
-theme: nord 
+theme: default 
 # theme: uncover, default, nord, gaia, wave, dracula
 # class: invert
-size: 16:9
 paginate: true
 style: |
-  section {
-    font-size: 32px;
+  a {
+    color: #003d99;
   }
-  h1 {
-    font-size: 60px;
+  a:hover {
+    color: #002266;
   }
   h2 {
-    font-size: 48px;
+    color: #0066cc;
   }
 ---
 
@@ -529,67 +528,4 @@ WITH (FORMAT GDAL, DRIVER 'ESRI Shapefile');
 - GitHub : https://github.com/duckdb/duckdb
 - Une liste sélectionnée de bibliothèques, d'outils et de ressources DuckDB : https://github.com/davidgasquez/awesome-duckdb
 - Plugin QGIS QDuckDB : https://plugins.qgis.org/plugins/qduckdb/
-
----
-
-# 06
-## Exercices pratiques
-
----
-
-## Exercice 1 : Installation et premières requêtes
-
-**Objectifs :**
-1. Installer DuckDB sur votre machine
-2. Télécharger un fichier Parquet géospatial
-3. Afficher les 10 premières lignes
-4. Calculer des statistiques (COUNT, MIN, MAX)
-
-**Durée estimée :** 30 minutes
-
----
-
-## Exercice 2 : Manipulation spatiale
-
-**Objectifs :**
-1. Charger l'extension spatiale
-2. Créer des géométries depuis coordonnées
-3. Calculer des buffers autour de points
-4. Filtrer par emprise spatiale (BBOX)
-
-**Durée estimée :** 45 minutes
-
----
-
-## Exercice 3 : Conversion de formats
-
-**Objectifs :**
-1. Convertir Shapefile → Parquet
-2. Convertir Parquet → GeoPackage
-3. Comparer les tailles de fichiers
-4. Mesurer les temps d'exécution
-
-**Durée estimée :** 45 minutes
-
----
-
-## Exercice 4 : Requêtes analytiques
-
-**Objectifs :**
-1. Charger un dataset de plusieurs millions de lignes
-2. Effectuer des agrégations spatiales
-3. Créer des jointures spatiales
-4. Générer un rapport statistique
-
-**Durée estimée :** 1 heure
-
----
-
-## Merci pour votre attention !
-
-**Questions ?**
-
----
-
-*Cours élaboré à partir de la présentation FOSS4G-BE 2025*
-*Par Florent Fougères*
+- Article Géotribu : https://geotribu.fr/articles/2023/2023-12-19_duckdb-donnees-spatiales/

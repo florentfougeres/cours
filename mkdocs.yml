@@ -13,6 +13,7 @@ theme:
     - navigation.tracking
     - toc.follow
     - toc.integrate
+    - content.code.copy
   logo: assets/img/logo.png
   favicon: assets/img/logo.png
   icon:
@@ -36,6 +37,8 @@ plugins:
 
 nav:
   - Accueil: index.md
-  - DuckDB:
-      - Présentation: duckdb/presentation.html
-      - Exercices: duckdb/exercice.md
+  - DuckDB: duckdb/exercice.md
+
+extra:
+  pdf: true
+use_directory_urls: false

@@ -1,5 +1,9 @@
 # Traitement de données géospatiales avec Parquet et DuckDB
 
+## La présentation
+
+<iframe src="/duckdb/presentation.pdf" width="100%" height="600px"></iframe>
+
 ## Exercice 1: Introduction avec la CLI DuckDB
 
 ### Télécharger l'éxécutable DuckDB
