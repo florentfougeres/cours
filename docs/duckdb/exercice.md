@@ -51,7 +51,7 @@ LOAD spatial;
 
 ### Créer une base de données
 
-!!! warning Nous sommes sur une base temporaire
+!!! warning 
     Actuellement nous sommes dans une base temporaire, tout ce que nous éxécutions ne sera pas sauvegarder. Il faut donc que crééons une base de données pour garder notre travail.
 
 ```sql
@@ -64,7 +64,8 @@ Cette [page](https://duckdb.org/docs/stable/sql/statements/create_table) de la d
 
 On va créer une table nommé `ville` avec un champs, `id` sera nore clé primaire et qui s'auto incrémente, un champs `nom`de type `VARCHAR` et un champs géométrique nommé `geom`.
 
-!!! warning Attention, les colonnes de géométries n'ont pas de type.
+!!! warning
+    Attention, les colonnes de géométries n'ont pas de type.
     Une des particularités des colonnes de géométrie sur DuckDB spatial est l'absence de définition du type de géométrie (contrairement à PostGIS par exemple). Une même colonne de géométrie contiendra aussi bien des points, des lignes, des polygones, etc. On peux dans une même table par exemple mélanger des points et des lignes. Mais que cela soit possible je ne vous le conseil pas.
 
 ```sql
@@ -153,8 +154,6 @@ UPDATE airports SET the_geom = ST_POINT(longitude_deg, latitude_deg) ;
 
 ## Exercice 2: Récupérer des données et effectuer nos premiers traitements géographiques
 
-
-
 ### Lancer l'interface Web de DuckDB
 
 !!! tip On va sortir du terminal
@@ -175,6 +174,23 @@ duckdb.exe -ui
 Une fênetre va s'ouvrir dans votre navigateur web à l'adresse `http://localhost:4213/`
 
 ![alt text](./img/ui.png)
+
+Une fois dans cette interface on peux de nouveau connecter notre base de données créée lors de l'exercice 1.
+
+### Récupérer une données au format parquet
+
+Nous allons utiliser ce jeu de données : https://data.rennesmetropole.fr/explore/dataset/voies-du-referentiel-voies-et-adresses-de-rennes-metropole/information/?location=17,48.0694,-1.69152&basemap=0a029a
+
+Depuis l'onglet `export` on peux récupérer l'url du parquet.
+
+```url
+https://public.opendatasoft.com/api/explore/v2.1/catalog/datasets/geonames-all-cities-with-a-population-1000/exports/parquet/?lang=fr&timezone=Europe%2FParis
+```
+
+!!! tip 
+    Nous avons pas besoin de télécharger le fichier nous allons directement donné l'URL du fichier parquet dans l'url de notre requête.
+
+
 
 ## Exercice 3: Utiliser le plugin QGIS et visualiser nos données
 
