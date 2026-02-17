@@ -1,5 +1,4 @@
 site_name: Cours - Florent Fougères
-
 theme:
   name: material
   features:
@@ -18,7 +17,6 @@ theme:
   favicon: assets/img/logo.png
   icon:
     repo: fontawesome/brands/github
-
 markdown_extensions:
   - attr_list
   - admonition
@@ -29,16 +27,11 @@ markdown_extensions:
       alternate_style: true
   - pymdownx.details
   - md_in_html
-
 plugins:
   - search:
       lang: fr
   - mermaid2
-
 nav:
   - Accueil: index.md
   - DuckDB: duckdb/exercice.md
-
-extra:
-  pdf: true
 use_directory_urls: false
