@@ -5,6 +5,25 @@ repo_url: "https://github.com/florentfougeres/cours"
 
 theme:
   name: material
+  extra_css:
+    - assets/stylesheets/extra.css
+  palette:
+    # Palette clair
+    - scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/weather-night
+        name: Passer en mode sombre
+
+    # Palette sombre
+    - scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/weather-sunny
+        name: Passer en mode clair
+
   features:
     - navigation.hide
     - navigation.instant
@@ -24,6 +43,9 @@ theme:
 markdown_extensions:
   - attr_list
   - admonition
+  - pymdownx.emoji:
+      emoji_index: !!python/name:pymdownx.emoji.gemoji
+      emoji_generator: !!python/name:pymdownx.emoji.to_svg
   - codehilite
   - pymdownx.highlight
   - pymdownx.superfences

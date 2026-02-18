@@ -469,10 +469,77 @@ WHERE code_dep = '35';
 
 ![Buffer de 10 km](../assets/img/layer_buffer.png)
 
-## Exercice 4 : DuckDB avec l'Open Data de Rennes Métropole
+## Exercice 4 : Traiter des données parquet d'Overture Maps avec DuckDB
+
+*Cet exercice est issus de mon [article](https://geotribu.fr/articles/2023/2023-12-19_duckdb-donnees-spatiales/) sur DuckDB publié sur Géotribu*
+
+!!! abstract
+    Les données Overture Maps sont une base de données cartographique ouverte qui décrit des éléments du monde réel comme les routes, les bâtiments, les adresses ou les lieux.
+    Le projet est géré par la Overture Maps Foundation, une organisation créée par de grandes entreprises technologiques comme Amazon, Microsoft, Meta et TomTom,
+
+Les données d’Overture Maps sont fournies sous forme de fichier Parquet ([décrites ici](https://docs.overturemaps.org/overview/feature-model/)), nous allons donc importer ces données dans une base pour les consulter.
+
+### Importer les données dans la base
+
+Dans cet exemple, on récupère 100 bâtiments aléatoirement.
+
+
+
+```sql
+CREATE TABLE buildings AS (
+SELECT
+    type, version, height, level, class, JSON(names) as names, JSON(sources) as sources, geometry
+FROM
+    read_parquet('s3://overturemaps-us-west-2/release/2026-01-21.0/theme=buildings/type=building/*.parquet', hive_partitioning=1)
+LIMIT 100);
+```
+
+Dans cet autre exemple, on récupère les bâtiments d’une partie de la ville de Laval en indiquant les coordonnées d’un rectangle.
+
+```sql
+CREATE TABLE laval_buildings AS ( 
+SELECT
+    type, version, height, level, JSON(names) as names, JSON(sources) as sources, geometry
+FROM
+    read_parquet('s3://overturemaps-us-west-2/release/2026-01-21.0/theme=buildings/type=building/*.parquet', hive_partitioning=1)
+WHERE 
+    bbox.xmin > -0.7948129589175504
+    AND bbox.xmax < -0.7472280816538276
+    AND bbox.ymin > 48.069335046027035
+    AND bbox.ymax < 48.073450034830316);
+```
+
+### Convertir les données en un GeoJSON en utilisant DuckDB
+
+Un des atouts de DuckDB est qu'en plus d’intégrer des données pour les traiter en base, il peut servir d’outil de conversion pour des données Parquet. Exemple : si on me donne des données en Parquet et je souhaite des GeoJSON, DuckDB peut les convertir sans créer de table ni de base !
+
+```sql
+COPY (
+    SELECT
+        type,version, height, level, JSON(names) as names, JSON(sources) as sources, geometry
+    FROM
+        read_parquet('s3://overturemaps-us-west-2/release/2026-01-21.0/theme=buildings/type=building/*.parquet', hive_partitioning=1)
+    WHERE 
+        bbox.xmin > -0.7948129589175504
+        AND bbox.xmax < -0.7472280816538276
+        AND bbox.ymin > 48.069335046027035
+        AND bbox.ymax < 48.073450034830316)
+TO 'laval_buildings.geojson'
+WITH (FORMAT GDAL, DRIVER 'GeoJSON', SRS 'EPSG:4326');
+```
+
+:bulb: Il est également possible d'exporter en Shapefile, pour cela, il faut remplacer les deux dernières lignes par celles-ci :
+
+```sql
+TO 'laval_buildings.shp'
+WITH (FORMAT GDAL, DRIVER 'ESRI Shapefile', SRS 'EPSG:4326');
+```
+
+## Exercice 5 : DuckDB avec l'Open Data de Rennes Métropole
 
 Le [portail Open Data de Rennes Métropole](https://data.rennesmetropole.fr/pages/home/) fournit les données au format Parquet.
 
 - Intégrez dans une base DuckDB deux couches de votre choix
 - Utilisez les fonctions spatiales de DuckDB pour croiser spatialement ces données
 - Chargez le résultat dans QGIS à l'aide du plugin QDuckDB
+
