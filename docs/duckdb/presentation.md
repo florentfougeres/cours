@@ -518,14 +518,51 @@ WITH (FORMAT GDAL, DRIVER 'ESRI Shapefile');
 
 ---
 
-## Ressources
 
-**Documentation et communauté :**
+---
 
-- Site officiel : https://duckdb.org
-- Documentation : https://duckdb.org/docs
-- Extension spatiale : https://duckdb.org/docs/extensions/spatial
-- GitHub : https://github.com/duckdb/duckdb
-- Une liste sélectionnée de bibliothèques, d'outils et de ressources DuckDB : https://github.com/davidgasquez/awesome-duckdb
-- Plugin QGIS QDuckDB : https://plugins.qgis.org/plugins/qduckdb/
-- Article Géotribu : https://geotribu.fr/articles/2023/2023-12-19_duckdb-donnees-spatiales/
+## Site & Documentation officielle
+
+| Ressource | Lien |
+|-----------|------|
+| 🏠 Site officiel | [duckdb.org](https://duckdb.org) |
+| 📖 Documentation | [duckdb.org/docs](https://duckdb.org/docs) |
+| 🗺️ Extension spatiale | [docs/extensions/spatial](https://duckdb.org/docs/extensions/spatial) |
+| 💻 GitHub | [duckdb/duckdb](https://github.com/duckdb/duckdb) |
+
+---
+
+## Outils & Plugins
+
+- **Awesome DuckDB** — Une liste sélectionnée de bibliothèques, d'outils et de ressources DuckDB  
+  → [github.com/davidgasquez/awesome-duckdb](https://github.com/davidgasquez/awesome-duckdb)
+
+- **Plugin QGIS QDuckDB** — Intégration native de DuckDB dans QGIS  
+  → [plugins.qgis.org/plugins/qduckdb](https://plugins.qgis.org/plugins/qduckdb/)
+
+- **GeoParquet.io** — Outils de transformation rapides pour les fichiers GeoParquet utilisant PyArrow et DuckDB  
+  → [geoparquet.io](https://geoparquet.io/)
+
+---
+
+## 📚 Articles & Tutoriels
+
+### Géotribu
+- **DuckDB et données spatiales**  
+  → [geotribu.fr — DuckDB données spatiales](https://geotribu.fr/articles/2023/2023-12-19_duckdb-donnees-spatiales/)
+
+### icem7 — Série DuckDB
+
+- **Parquet devrait remplacer le format CSV**  
+  → [icem7.fr/cartographie/parquet-devrait-remplacer-le-format-csv](https://www.icem7.fr/cartographie/parquet-devrait-remplacer-le-format-csv/)
+
+- **3 explorations bluffantes avec DuckDB** *(série en 3 parties)*
+
+  | Épisode | Thème | Lien |
+  |---------|-------|------|
+  | 1/3 | Interroger des fichiers distants | [lien](https://www.icem7.fr/pedagogie/3-explorations-bluffantes-avec-duckdb-1-interroger-des-fichiers-distants/) |
+  | 2/3 | Butiner des API JSON | [lien](https://www.icem7.fr/pedagogie/3-explorations-bluffantes-avec-duckdb-butiner-des-api-json-2-3/) |
+  | 3/3 | Croiser les requêtes spatiales | [lien](https://www.icem7.fr/cartographie/3-explorations-bluffantes-avec-duckdb-croiser-les-requetes-spatiales-3-3/) |
+
+- **Comment bien préparer son Parquet**  
+  → [icem7.fr/outils/comment-bien-preparer-son-parquet](https://www.icem7.fr/outils/comment-bien-preparer-son-parquet/)
