@@ -4,36 +4,36 @@
 
 <iframe src="presentation.pdf" width="100%" height="600px"></iframe>
 
-## Exercice 1: Introduction avec la CLI DuckDB
+## Exercice 1 : Introduction avec la CLI DuckDB
 
-### Télécharger l'éxécutable DuckDB
+### Télécharger l'exécutable DuckDB
 
 Depuis le [site officiel](https://duckdb.org/install/?platform=windows&environment=cli)
 
-![Téléchargement de l'éxécutable](./img/cli.png)
+![Téléchargement de l'exécutable](./img/cli.png)
 
 ### Lancer DuckDB depuis un terminal
 
-Il faut depuis un terminal se placer dans le dossier ou vous avez téléchargé l'éxécutable, par exemple:
+Il faut, depuis un terminal, se placer dans le dossier où vous avez téléchargé l'exécutable, par exemple :
 
 ```bash
 cd C:\Users\florent\
 ```
 
-Puis lancer l'éxécutable
+Puis lancer l'exécutable :
 
 ```bash
 duckdb.exe
 ```
 
-On arrive alors dans la console DuckDB (équivalent psql) pn peux taper du SQL.
+On arrive alors dans la console DuckDB (équivalent de psql) où l'on peut taper du SQL.
 
 ```sql
 SELECT 1 as number, 'a' as letter ; 
 ```
 
 !!! info
-    Avant de faire Entrer il faut toujours terminer l'instruction SQL par un point virgule `;`
+    Avant d'appuyer sur Entrée, il faut toujours terminer l'instruction SQL par un point-virgule `;`
 
 ### Installer l'extension spatial
 
@@ -41,18 +41,18 @@ SELECT 1 as number, 'a' as letter ;
 INSTALL spatial; 
 ```
 
-Puis charger l'extension
+Puis charger l'extension :
 
 ```sql
 LOAD spatial;
 ```
 
-> La documentation de l'extension spatial se trouve sur cette [page](https://duckdb.org/docs/stable/core_extensions/spatial/overview), on y retrouve la liste des [fonctions](https://duckdb.org/docs/stable/core_extensions/spatial/functions) disponible
+> La documentation de l'extension spatial se trouve sur cette [page](https://duckdb.org/docs/stable/core_extensions/spatial/overview), on y retrouve la liste des [fonctions](https://duckdb.org/docs/stable/core_extensions/spatial/functions) disponibles.
 
 ### Créer une base de données
 
-!!! warning 
-    Actuellement nous sommes dans une base temporaire, tout ce que nous éxécutions ne sera pas sauvegarder. Il faut donc que crééons une base de données pour garder notre travail.
+!!! warning
+    Actuellement nous sommes dans une base temporaire, tout ce que nous exécutons ne sera pas sauvegardé. Il faut donc créer une base de données pour conserver notre travail.
 
 ```sql
 .open C:\Users\florent\chemin\vers\ma\base.duckdb
@@ -62,11 +62,11 @@ LOAD spatial;
 
 Cette [page](https://duckdb.org/docs/stable/sql/statements/create_table) de la documentation montre des exemples.
 
-On va créer une table nommé `ville` avec un champs, `id` sera nore clé primaire et qui s'auto incrémente, un champs `nom`de type `VARCHAR` et un champs géométrique nommé `geom`.
+On va créer une table nommée `ville` avec plusieurs champs : `id` sera notre clé primaire et s'auto-incrémentera, `nom` sera de type `VARCHAR` et `geom` sera un champ géométrique.
 
 !!! warning
-    Attention, les colonnes de géométries n'ont pas de type.
-    Une des particularités des colonnes de géométrie sur DuckDB spatial est l'absence de définition du type de géométrie (contrairement à PostGIS par exemple). Une même colonne de géométrie contiendra aussi bien des points, des lignes, des polygones, etc. On peux dans une même table par exemple mélanger des points et des lignes. Mais que cela soit possible je ne vous le conseil pas.
+    Attention, les colonnes de géométrie n'ont pas de type.
+    Une des particularités des colonnes de géométrie dans DuckDB spatial est l'absence de définition du type de géométrie (contrairement à PostGIS par exemple). Une même colonne de géométrie peut contenir aussi bien des points, des lignes, des polygones, etc. Il est donc possible de mélanger des points et des lignes dans une même table, mais même si c'est techniquement possible, je vous le déconseille.
 
 ```sql
 CREATE SEQUENCE seq_ville START 1;
@@ -78,7 +78,7 @@ CREATE TABLE ville (
 ```
 
 !!! info
-    Pour rappel, une colonne de géométrie n'a pas de système de projection dans sa définition. Conséquences, il n'y a :
+    Pour rappel, une colonne de géométrie n'a pas de système de projection dans sa définition. En conséquence, il n'y a :
     - pas de définition de projection comme contrainte pour une colonne
     - pas d'attribution d'une projection lors d'un export
 
@@ -108,7 +108,7 @@ D SHOW TABLES ;
 └─────────┘
 ```
 
-On va maintenant insérer nos des données dans notre table.
+On va maintenant insérer des données dans notre table.
 
 ```sql
 INSERT INTO ville (nom, geom) VALUES
@@ -133,70 +133,70 @@ D select * from ville ;
 
 ### Importer un CSV et créer la géométrie
 
-!!! info Lire un csv
-    La fonction `read_csv_auto` nous permet de pouvoir importer un CSV sans avoir à créer la table au préalable. Cette fonction détecte automatiquement la structure du CSV.
+!!! info Lire un CSV
+    La fonction `read_csv_auto` nous permet d'importer un CSV sans avoir à créer la table au préalable. Cette fonction détecte automatiquement la structure du CSV.
 
 ```sql
 CREATE TABLE airports AS FROM read_csv_auto('https://davidmegginson.github.io/ourairports-data/airports.csv', HEADER=True, DELIM=',') ;
 ```
 
-Il faut maintenant ajouter une colonne de geometry à notre table.
+Il faut maintenant ajouter une colonne de géométrie à notre table.
 
 ```sql
 ALTER TABLE airports ADD COLUMN the_geom GEOMETRY ;
 ```
 
-Puis on mets à jour cette colonne en créant un point à partir des colonnes `longitude_deg` et `latitude_deg`
+Puis on met à jour cette colonne en créant un point à partir des colonnes `longitude_deg` et `latitude_deg` :
 
 ```sql
 UPDATE airports SET the_geom = ST_POINT(longitude_deg, latitude_deg) ;
 ```
 
-## Exercice 2: Récupérer des données et effectuer nos premiers traitements géographiques
+## Exercice 2 : Récupérer des données et effectuer nos premiers traitements géographiques
 
-### Lancer l'interface Web de DuckDB
+### Lancer l'interface web de DuckDB
 
 !!! tip On va sortir du terminal
-    Pour un peu plus de confort on va réaliser cet exercice dans l'interface web fourni avec l'éxécutable DuckDB, un peu l'équivalent du `PgAdmin`de DuckDB.
+    Pour un peu plus de confort, on va réaliser cet exercice dans l'interface web fournie avec l'exécutable DuckDB, l'équivalent de `PgAdmin` pour DuckDB.
 
-Il faut depuis un terminal se placer dans le dossier ou vous avez téléchargé l'éxécutable, par exemple:
+Il faut, depuis un terminal, se placer dans le dossier où vous avez téléchargé l'exécutable, par exemple :
 
 ```bash
 cd C:\Users\florent\
 ```
 
-Puis lancer l'éxécutable avec l'option `-ui`
+Puis lancer l'exécutable avec l'option `-ui` :
 
 ```bash
 duckdb.exe -ui
 ```
 
-Une fênetre va s'ouvrir dans votre navigateur web à l'adresse `http://localhost:4213/`
+Une fenêtre va s'ouvrir dans votre navigateur web à l'adresse `http://localhost:4213/`
 
 ![alt text](./img/ui.png)
 
-Une fois dans cette interface on peux de nouveau connecter notre base de données créée lors de l'exercice 1.
+Une fois dans cette interface, on peut de nouveau se connecter à la base de données créée lors de l'exercice 1.
 
-### Récupérer et explorer une données au format parquet
+### Récupérer et explorer des données au format Parquet
 
 Nous allons utiliser ce jeu de données : https://public.opendatasoft.com/explore/assets/geonames-all-cities-with-a-population-1000/
 
-Depuis l'onglet `export` on peux récupérer l'url du parquet.
+Depuis l'onglet `export`, on peut récupérer l'URL du fichier Parquet.
 
 ```url
 https://public.opendatasoft.com/api/explore/v2.1/catalog/datasets/geonames-all-cities-with-a-population-1000/exports/parquet/?lang=fr&timezone=Europe%2FParis
 ```
 
 !!! tip 
-    Nous avons pas besoin de télécharger le fichier nous allons directement donné l'URL du fichier parquet dans l'url de notre requête.
+    Nous n'avons pas besoin de télécharger le fichier, nous allons directement fournir l'URL du fichier Parquet dans notre requête.
 
-Pour lire un fichier distant il est necessaire de charger une autre extension
+Pour lire un fichier distant, il est nécessaire de charger une autre extension :
 
 ```sql
 load httpfs ;
 ```
 
-On regarde à quoi ressemble notre données
+On regarde à quoi ressemblent nos données :
 
 ```sql
 SELECT * FROM read_parquet('https://public.opendatasoft.com/api/explore/v2.1/catalog/datasets/geonames-all-cities-with-a-population-1000/exports/parquet/?lang=fr&timezone=Europe%2FParis')
@@ -224,9 +224,9 @@ LIMIT 10;
 ```
 
 !!! warning
-    Je n'ai pas fait le `load spatial` donc la colonne de géométrie est mal comprise, elle est de type blob. 
+    Je n'ai pas fait le `load spatial`, donc la colonne de géométrie est mal interprétée : elle est de type blob. 
 
-Après avoir refait le `load spatial` j'ai une colonne de géométrie bien interprété. 
+Après avoir refait le `load spatial`, j'obtiens une colonne de géométrie bien interprétée.
 
 ```sql
 ┌────────────┬──────────────────────┬──────────────────────┬──────────────────────┬───────────────┬──────────────┬───┬───────────┬───────┬─────────────────────┬───────────────────┬────────────────────┬──────────────────────┐
@@ -248,7 +248,7 @@ Après avoir refait le `load spatial` j'ai une colonne de géométrie bien inter
 └──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
-On ne va pas garder toutes les colonnes pour cela, on va faire un describe pour voir ce qui est dispo.
+On ne va pas garder toutes les colonnes. On va faire un `DESCRIBE` pour voir ce qui est disponible.
 
 ```sql
 D DESCRIBE SELECT * 
@@ -284,7 +284,7 @@ LIMIT 1 ;
 ```
 
 !!! tip
-    En faisant le describe de cette manière on est quand même obliger de récupérer des données pour obtenir la description de la table. Il existe une méthode plus effiace qui est la fonction parquet_schema. Cette fonction lit uniquement le **footer du fichier Parquet** (quelques KB), qui contient le schéma, sans charger les données. Cela fonctionne parfaitement avec des fichiers locaux ou des URLs pointant vers des fichiers Parquet statiques.
+    En utilisant `DESCRIBE` de cette manière, on est tout de même obligé de récupérer des données pour obtenir la description de la table. Il existe une méthode plus efficace : la fonction `parquet_schema`. Cette fonction lit uniquement le **footer du fichier Parquet** (quelques Ko), qui contient le schéma, sans charger les données. Cela fonctionne parfaitement avec des fichiers locaux ou des URLs pointant vers des fichiers Parquet statiques.
 
 ```sql
 D SELECT * FROM parquet_schema('https://public.opendatasoft.com/api/explore/v2.1/catalog/datasets/geonames-all-cities-with-a-population-1000/exports/parquet/?lang=fr&timezone=Europe%2FParis');
@@ -318,19 +318,19 @@ D SELECT * FROM parquet_schema('https://public.opendatasoft.com/api/explore/v2.1
 └────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
-### Créer une table à partir d'un parquet
+### Créer une table à partir d'un fichier Parquet
 
 !!! warning 
-    Attention aux fichiers Parquet distants
-    Tous les serveurs ne sont pas compatibles avec les requêtes HTTP Range. Dans ce cas, DuckDB ne peut pas profiter du stockage en colonnes pour ne télécharger que ce dont il a besoin — il est forcé de tout récupérer d'un coup, ce qui peut provoquer des erreurs.
+    Attention aux fichiers Parquet distants.
+    Tous les serveurs ne sont pas compatibles avec les requêtes HTTP Range. Dans ce cas, DuckDB ne peut pas tirer parti du stockage en colonnes pour ne télécharger que ce dont il a besoin — il est forcé de tout récupérer d'un coup, ce qui peut provoquer des erreurs.
 
     La solution est d'utiliser `SET force_download=true;` pour indiquer à DuckDB de télécharger le fichier en entier avant de l'interroger.
 
-    **Si le fichier Parquet était en local**, ce problème n'existerait pas : DuckDB lirait directement les colonnes dont il a besoin sur votre disque, sans contrainte réseau, et profiterait pleinement de tous les avantages du format (column pruning, predicate pushdown...).
+    **Si le fichier Parquet était en local**, ce problème n'existerait pas : DuckDB lirait directement les colonnes nécessaires sur votre disque, sans contrainte réseau, et profiterait pleinement de tous les avantages du format (column pruning, predicate pushdown...).
 
     Retenez donc que les gains de performance de Parquet sont maximaux quand les fichiers sont **en local ou sur un stockage cloud bien configuré** (S3, GCS, Azure Blob).
 
-On va donc faire un `SET force_download=true;` (sauf si vous avez téléchargé le parquet en local).
+On va donc exécuter `SET force_download=true;` (sauf si vous avez téléchargé le fichier Parquet en local).
 
 On va créer une table dans notre base en ne gardant que certaines colonnes et les villes françaises.
 
@@ -340,7 +340,7 @@ FROM read_parquet('https://public.opendatasoft.com/api/explore/v2.1/catalog/data
 WHERE country_code = 'FR' ;
 ```
 
-On vérifie qu'on a bien récupéré des données
+On vérifie qu'on a bien récupéré des données :
 
 ```sql
 D SELECT * FROM villes_1000_hab_fr LIMIT 5 ;
@@ -358,18 +358,18 @@ D SELECT * FROM villes_1000_hab_fr LIMIT 5 ;
 
 ### Utiliser les fonctions spatiales de DuckDB
 
-L'objetcif est de rajouter une colonne départements à notre tables des villes françaises de plus de 1000 habitants via une jointure spatiale.
+L'objectif est d'ajouter une colonne départements à notre table des villes françaises de plus de 1 000 habitants, via une jointure spatiale.
 
 Vous trouverez [ici](../assets/data/departements.geojson) une couche des départements.
 
-On va maintenant intégrer ce geojson dans notre base de données. Pour cela nous allons utiliser la fonction `st_read` qui est docmeunté [ici](https://duckdb.org/docs/stable/core_extensions/spatial/functions#st_read), elle nous permet de lire un fichier spatial dans une clause from, divers format sont supportés grace à l'utilisation de GDAL.
+On va maintenant intégrer ce GeoJSON dans notre base de données. Pour cela, nous allons utiliser la fonction `st_read`, documentée [ici](https://duckdb.org/docs/stable/core_extensions/spatial/functions#st_read). Elle nous permet de lire un fichier spatial dans une clause `FROM` ; divers formats sont supportés grâce à l'utilisation de GDAL.
 
 ```sql
 CREATE TABLE departement AS
 SELECT * FROM st_read('/home/florent/perso/cours/docs/assets/data/departements.geojson');
 ```
 
-Vérifions que la table est bien intégré.
+Vérifions que la table est bien intégrée.
 
 ```sql
 D SELECT * FROM departement LIMIT 2 ;
@@ -382,14 +382,14 @@ D SELECT * FROM departement LIMIT 2 ;
 └────────────┴────────────┴──────────────────────┴───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
-Maintenant mettons ajoutons un colonne code_dep à notre table villes_1000_hab_fr.
+Ajoutons maintenant une colonne `code_dep` à notre table `villes_1000_hab_fr`.
 
-Pour cela deux solutions s'offrent à nous.
+Pour cela, deux solutions s'offrent à nous :
 
-- Créer d'abord par la colonne puis la remplir via une instruction `UPDATE`
-- Créer une nouvelle table et supprimer l'ancienne.
+- Créer d'abord la colonne, puis la remplir via une instruction `UPDATE`
+- Créer une nouvelle table et supprimer l'ancienne
 
-#### Option 1: créer la colonne et update ensuite
+#### Option 1 : créer la colonne et la mettre à jour ensuite
 
 ```sql
 ALTER TABLE villes_1000_hab_fr ADD COLUMN code_dep VARCHAR;
@@ -400,7 +400,7 @@ FROM departement d
 WHERE ST_Within(villes_1000_hab_fr.coordinates, d.geom);
 ```
 
-#### Option 2: nouvelle table
+#### Option 2 : nouvelle table
 
 ```sql
 CREATE TABLE villes_1000_hab_fr_new AS
@@ -414,7 +414,7 @@ DROP TABLE villes_1000_hab_fr;
 ALTER TABLE villes_1000_hab_fr_new RENAME TO villes_1000_hab_fr;
 ```
 
-## Exercice 3: Utiliser le plugin QGIS et visualiser nos données
+## Exercice 3 : Utiliser le plugin QGIS et visualiser nos données
 
 ### Installer le plugin QGIS
 
@@ -423,29 +423,29 @@ Depuis le gestionnaire des extensions QGIS.
 ![Installation du plugin QGIS QDuckDB](../assets/img/qduckdb_install.png)
 
 !!! warning
-    Si vous êtes sur **Windows** le plugin intègre la dépendance python `duckdb`il n'y a donc rien à faire de plus. En revanche sur vous êtes sur MacOS ou Linux il faut consulter la [docuemntation](https://oslandia.gitlab.io/qgis/qduckdb/usage/installation.html) du plugin.
+    Si vous êtes sur **Windows**, le plugin intègre la dépendance Python `duckdb`, il n'y a donc rien à faire de plus. En revanche, si vous êtes sur macOS ou Linux, il faut consulter la [documentation](https://oslandia.gitlab.io/qgis/qduckdb/usage/installation.html) du plugin.
 
-### Visualiser dans QGIS les couches que nous avons réaliser dans les exercices 1 et 2
+### Visualiser dans QGIS les couches réalisées dans les exercices 1 et 2
 
-Dans votre barre des extensions de QGIS vous trouverez une icone DuckDB qui lance l'interface du plugin. Charger votre base de données.
+Dans votre barre des extensions de QGIS, vous trouverez une icône DuckDB qui lance l'interface du plugin. Chargez votre base de données.
 
 !!! warning
-    DuckDB ne connait pas (encore) le projection des données, il est impératif de la préciser.
+    DuckDB ne connaît pas (encore) la projection des données, il est impératif de la préciser.
 
-![Fênetre QDuckDB](../assets/img/dialog_qduckdb.png)
+![Fenêtre QDuckDB](../assets/img/dialog_qduckdb.png)
 
 !!! info
-    On a créer nos table sans préciser de schéma donc elle sont dans le schéma `main` (équivalent du schéma `public` de PostGIS)
+    Nous avons créé nos tables sans préciser de schéma, elles se trouvent donc dans le schéma `main` (équivalent du schéma `public` de PostGIS).
 
-Exemple de visualisation, notre couche `ville_1000_hab_fr`:
+Exemple de visualisation, notre couche `villes_1000_hab_fr` :
 
 ![Visualisation d'une couche](../assets/img/layer_duckdb.png)
 
-### Éxécuter des selections SQL depuis le plugin
+### Exécuter des sélections SQL depuis le plugin
 
-Depuis le plugin est possible de charger des couches via requêtes SQL 
+Depuis le plugin, il est possible de charger des couches via des requêtes SQL.
 
-#### Chargement des villes du départements 35
+#### Chargement des villes du département 35
 
 ```sql
 SELECT * 
@@ -458,7 +458,7 @@ WHERE code_dep = '35'
 #### Chargement d'une couche de buffer autour des points
 
 !!! warning
-    Notre couche est en WGS84 (`EPSG:4326`), si on fait un buffer sans convertir vers une projection mértique la distance sera en degrés. Il faut donc forcer une transformation en 2154 à l'aide de la fonction `ST_Transform` et indiquer à QGIS que la couche est en `EPSG:2154`.
+    Notre couche est en WGS84 (`EPSG:4326`). Si on effectue un buffer sans convertir vers une projection métrique, la distance sera exprimée en degrés. Il faut donc forcer une transformation en Lambert-93 à l'aide de la fonction `ST_Transform` et indiquer à QGIS que la couche est en `EPSG:2154`.
 
 ```sql
 SELECT name, population, 
@@ -469,10 +469,10 @@ WHERE code_dep = '35';
 
 ![Buffer de 10 km](../assets/img/layer_buffer.png)
 
-## Exercice 4: DuckDB avec l'Open Data de Rennes Métropole
+## Exercice 4 : DuckDB avec l'Open Data de Rennes Métropole
 
-Le [portail Open Data de Rennes Métropole](https://data.rennesmetropole.fr/pages/home/) fournit les données au format parquet.
+Le [portail Open Data de Rennes Métropole](https://data.rennesmetropole.fr/pages/home/) fournit les données au format Parquet.
 
-- Dans une base DuckDB intégré deux couches de notre choix
-- Utiliser les fonctions spatiales de DuckDB pour croiser spatialement ces données
-- Charger le résultat dans QGIS à l'aide du plugin QDuckDB
+- Intégrez dans une base DuckDB deux couches de votre choix
+- Utilisez les fonctions spatiales de DuckDB pour croiser spatialement ces données
+- Chargez le résultat dans QGIS à l'aide du plugin QDuckDB
