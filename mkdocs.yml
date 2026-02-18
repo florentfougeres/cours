@@ -3,10 +3,11 @@ site_url: https://florentfougeres.github.io/cours/
 repo_name: "cours"
 repo_url: "https://github.com/florentfougeres/cours"
 
+extra_css:
+  - stylesheets/extra.css
+
 theme:
   name: material
-  extra_css:
-    - assets/stylesheets/extra.css
   palette:
     # Palette clair
     - scheme: default
@@ -15,7 +16,6 @@ theme:
       toggle:
         icon: material/weather-night
         name: Passer en mode sombre
-
     # Palette sombre
     - scheme: slate
       primary: indigo
@@ -23,7 +23,6 @@ theme:
       toggle:
         icon: material/weather-sunny
         name: Passer en mode clair
-
   features:
     - navigation.hide
     - navigation.instant
@@ -40,6 +39,7 @@ theme:
   favicon: assets/img/logo.png
   icon:
     repo: fontawesome/brands/github
+
 markdown_extensions:
   - attr_list
   - admonition
@@ -53,13 +53,16 @@ markdown_extensions:
       alternate_style: true
   - pymdownx.details
   - md_in_html
+
 plugins:
   - search:
       lang: fr
   - mermaid2
+
 nav:
   - Accueil: index.md
   - DuckDB:
     - Présentation: duckdb/presentation.md
     - Exercice: duckdb/exercice.md
+
 use_directory_urls: false
