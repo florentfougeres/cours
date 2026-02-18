@@ -420,5 +420,59 @@ ALTER TABLE villes_1000_hab_fr_new RENAME TO villes_1000_hab_fr;
 
 Depuis le gestionnaire des extensions QGIS.
 
+![Installation du plugin QGIS QDuckDB](../assets/img/qduckdb_install.png)
+
+!!! warning
+    Si vous êtes sur **Windows** le plugin intègre la dépendance python `duckdb`il n'y a donc rien à faire de plus. En revanche sur vous êtes sur MacOS ou Linux il faut consulter la [docuemntation](https://oslandia.gitlab.io/qgis/qduckdb/usage/installation.html) du plugin.
+
+### Visualiser dans QGIS les couches que nous avons réaliser dans les exercices 1 et 2
+
+Dans votre barre des extensions de QGIS vous trouverez une icone DuckDB qui lance l'interface du plugin. Charger votre base de données.
+
+!!! warning
+    DuckDB ne connait pas (encore) le projection des données, il est impératif de la préciser.
+
+![Fênetre QDuckDB](../assets/img/dialog_qduckdb.png)
+
+!!! info
+    On a créer nos table sans préciser de schéma donc elle sont dans le schéma `main` (équivalent du schéma `public` de PostGIS)
+
+Exemple de visualisation, notre couche `ville_1000_hab_fr`:
+
+![Visualisation d'une couche](../assets/img/layer_duckdb.png)
+
+### Éxécuter des selections SQL depuis le plugin
+
+Depuis le plugin est possible de charger des couches via requêtes SQL 
+
+#### Chargement des villes du départements 35
+
+```sql
+SELECT * 
+FROM villes_1000_hab_fr
+WHERE code_dep = '35'
+```
+
+![Villes du 35](../assets/img/layer_35.png)
+
+#### Chargement d'une couche de buffer autour des points
+
+!!! warning
+    Notre couche est en WGS84 (`EPSG:4326`), si on fait un buffer sans convertir vers une projection mértique la distance sera en degrés. Il faut donc forcer une transformation en 2154 à l'aide de la fonction `ST_Transform` et indiquer à QGIS que la couche est en `EPSG:2154`.
+
+```sql
+SELECT name, population, 
+    ST_Buffer(ST_Transform(coordinates, 'EPSG:4326','EPSG:2154'), 10000) as geom
+FROM villes_1000_hab_fr
+WHERE code_dep = '35';
+```
+
+![Buffer de 10 km](../assets/img/layer_buffer.png)
+
 ## Exercice 4: DuckDB avec l'Open Data de Rennes Métropole
 
+Le [portail Open Data de Rennes Métropole](https://data.rennesmetropole.fr/pages/home/) fournit les données au format parquet.
+
+- Dans une base DuckDB intégré deux couches de notre choix
+- Utiliser les fonctions spatiales de DuckDB pour croiser spatialement ces données
+- Charger le résultat dans QGIS à l'aide du plugin QDuckDB
