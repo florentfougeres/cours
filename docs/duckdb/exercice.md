@@ -416,5 +416,9 @@ ALTER TABLE villes_1000_hab_fr_new RENAME TO villes_1000_hab_fr;
 
 ## Exercice 3: Utiliser le plugin QGIS et visualiser nos données
 
+### Installer le plugin QGIS
+
+Depuis le gestionnaire des extensions QGIS.
+
 ## Exercice 4: DuckDB avec l'Open Data de Rennes Métropole
 

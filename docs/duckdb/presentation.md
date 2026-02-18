@@ -517,10 +517,6 @@ WITH (FORMAT GDAL, DRIVER 'ESRI Shapefile');
 **→ Un outil à surveiller de près dans le domaine géospatial**
 
 ---
-
-
----
-
 ## Site & Documentation officielle
 
 | Ressource | Lien |
@@ -555,6 +551,8 @@ WITH (FORMAT GDAL, DRIVER 'ESRI Shapefile');
 
 - **Parquet devrait remplacer le format CSV**  
   → [icem7.fr/cartographie/parquet-devrait-remplacer-le-format-csv](https://www.icem7.fr/cartographie/parquet-devrait-remplacer-le-format-csv/)
+
+---
 
 - **3 explorations bluffantes avec DuckDB** *(série en 3 parties)*
 
