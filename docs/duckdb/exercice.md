@@ -543,3 +543,29 @@ Le [portail Open Data de Rennes Métropole](https://data.rennesmetropole.fr/page
 - Utilisez les fonctions spatiales de DuckDB pour croiser spatialement ces données
 - Chargez le résultat dans QGIS à l'aide du plugin QDuckDB
 
+### Correction
+
+On récupère les couches station de métro et iris. On enrichie la couche des stations de métro avec le code IRIS.
+
+```sql
+INSTALL spatial ;
+LOAD spatial ;
+
+SET force_download=true;
+
+CREATE TABLE station_metro AS
+SELECT * FROM read_parquet('https://data.rennesmetropole.fr/api/explore/v2.1/catalog/datasets/metro_localisation_stations/exports/parquet?lang=fr&timezone=Europe%2FBerlin')
+;
+
+ALTER TABLE station_metro DROP COLUMN  geo_point_2d ;
+
+CREATE TABLE iris as SELECT *
+FROM read_parquet('https://data.rennesmetropole.fr/api/explore/v2.1/catalog/datasets/iris_version_rennes_metropole/exports/parquet?lang=fr&timezone=Europe%2FBerlin');
+
+ALTER TABLE station_metro ADD COLUMN iris VARCHAR ; 
+
+UPDATE station_metro
+SET iris = d.code_iris
+FROM iris d
+WHERE ST_Within(station_metro.geo_shape, d.geo_shape);
+```
