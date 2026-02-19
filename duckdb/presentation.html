@@ -1,0 +1,1076 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://florentfougeres.github.io/cours/duckdb/presentation.html">
+      
+      
+        <link rel="prev" href="../index.html">
+      
+      
+        <link rel="next" href="exercice.html">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/img/logo.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>Présentation - Cours - Florent Fougères</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#traitement-de-donnees-geospatiales" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../index.html" title="Cours - Florent Fougères" class="md-header__button md-logo" aria-label="Cours - Florent Fougères" data-md-component="logo">
+      
+  <img src="../assets/img/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Cours - Florent Fougères
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Présentation
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Passer en mode sombre"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Passer en mode sombre" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Passer en mode clair"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Passer en mode clair" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/florentfougeres/cours" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    cours
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../index.html" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Accueil
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="presentation.html" class="md-tabs__link">
+          
+  
+  
+  DuckDB
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../index.html" title="Cours - Florent Fougères" class="md-nav__button md-logo" aria-label="Cours - Florent Fougères" data-md-component="logo">
+      
+  <img src="../assets/img/logo.png" alt="logo">
+
+    </a>
+    Cours - Florent Fougères
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/florentfougeres/cours" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    cours
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Accueil
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DuckDB
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    DuckDB
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="presentation.html" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Présentation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="exercice.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exercice
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="traitement-de-donnees-geospatiales">Traitement de données géospatiales</h1>
+<h1 id="avec-parquet-et-duckdb">avec Parquet et DuckDB</h1>
+<hr />
+<h1 id="florent-fougeres">👋 Florent Fougères</h1>
+<h2 id="developpeur-sig-chez-oslandia">Développeur SIG chez <a href="https://oslandia.com">Oslandia</a></h2>
+<h3 id="florentfougeres"><img src="https://www.svgrepo.com/show/512317/github-142.svg" height="40"> <a href="https://github.com/florentfougeres">@florentfougeres</a></h3>
+<h3 id="florentfougeres_1"><img src="https://www.svgrepo.com/show/448226/gitlab.svg" height="40"> <a href="https://gitlab.com/florentfougeres">@florentfougeres</a></h3>
+<h3 id="florentfougeresgmailcom"><img src="https://www.svgrepo.com/show/349354/email.svg" height="40"> <a href="mailto:florent.fougeres@gmail.com">florent.fougeres@gmail.com</a></h3>
+<h3 id="florent-fougeres_1"><img src="https://www.svgrepo.com/show/452047/linkedin-1.svg" height="40"> <a href="https://www.linkedin.com/in/florent-fougeres/">Florent Fougères</a></h3>
+<hr />
+<h2 id="plan-du-cours">Plan du cours</h2>
+<ol>
+<li>Introduction au format Parquet</li>
+<li>Le SGBD DuckDB : présentation et caractéristiques</li>
+<li>Performances et benchmarks</li>
+<li>Cas d'usage en SIG</li>
+<li>La complémentarité Parquet + DuckDB</li>
+<li>Exercices pratiques</li>
+</ol>
+<hr />
+<h2 id="1-introduction-au-format-parquet">1. Introduction au format Parquet</h2>
+<p><img alt="bg right:50% fit" src="https://cdn.dribbble.com/userupload/19991823/file/original-efc9605e60a43bab4ac37e1fed1c5ebc.png" /></p>
+<hr />
+<h2 id="quest-ce-que-parquet">Qu'est-ce que Parquet ?</h2>
+<ul>
+<li><strong>Format de fichier open source</strong></li>
+<li>Développé par la <strong>Fondation Apache</strong></li>
+<li>Conçu pour stocker et accéder à de <strong>grandes quantités de données</strong></li>
+<li><strong>Architecture orientée colonnes</strong></li>
+<li><strong>Compression efficace</strong></li>
+<li>Extension <strong>Geoparquet</strong> pour les géométries spatiales</li>
+</ul>
+<hr />
+<h2 id="architecture-orientee-colonnes">Architecture orientée colonnes</h2>
+<p><strong>Format traditionnel (orienté lignes) :</strong>
+<div class="highlight"><pre><span></span><code>Ligne 1: nom, prénom, ville, code_postal
+Ligne 2: nom, prénom, ville, code_postal
+Ligne 3: nom, prénom, ville, code_postal
+</code></pre></div></p>
+<p><strong>Parquet (orienté colonnes) :</strong>
+<div class="highlight"><pre><span></span><code>Colonne nom: [valeur1, valeur2, valeur3, ...]
+Colonne prénom: [valeur1, valeur2, valeur3, ...]
+Colonne ville: [valeur1, valeur2, valeur3, ...]
+</code></pre></div></p>
+<hr />
+<h2 id="avantages-de-larchitecture-colonnes">Avantages de l'architecture colonnes</h2>
+<p>✅ <strong>Meilleure compression</strong>
+- Les données d'une même colonne sont souvent similaires</p>
+<p>✅ <strong>Lecture optimisée</strong>
+- Ne lit que les colonnes nécessaires</p>
+<p>✅ <strong>Performance analytique</strong>
+- Idéal pour les agrégations et statistiques</p>
+<hr />
+<h2 id="organisation-en-dataset">Organisation en dataset</h2>
+<p>Un dataset Parquet peut être un <strong>dossier de fichiers</strong> :</p>
+<div class="highlight"><pre><span></span><code>/mon_dataset/
+  ├── partie_1.parquet
+  ├── partie_2.parquet
+  ├── partie_3.parquet
+  └── partie_4.parquet
+</code></pre></div>
+<p><strong>Avantages :</strong>
+- Traitement en parallèle (chunks)
+- Gestion efficace de gros volumes
+- Meilleure performance globale</p>
+<hr />
+<h2 id="geoparquet">Geoparquet</h2>
+<blockquote>
+<p>https://geoparquet.org</p>
+</blockquote>
+<p>Extension de Parquet pour les <strong>données géospatiales</strong></p>
+<ul>
+<li>Stockage des géométries spatiales</li>
+<li>Compatible avec tous les types géométriques</li>
+<li>Métadonnées spatiales (CRS, bbox, etc.)</li>
+<li>Tous les avantages de Parquet préservés</li>
+</ul>
+<hr />
+<h2 id="benchmark-comparaison-des-formats">Benchmark : Comparaison des formats</h2>
+<p><strong>Données :</strong> Localités mondiales &gt; 1 000 habitants</p>
+<table>
+<thead>
+<tr>
+<th>Format</th>
+<th>Taille du fichier</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GeoJSON</td>
+<td>~100 MB</td>
+</tr>
+<tr>
+<td>CSV</td>
+<td>~80 MB</td>
+</tr>
+<tr>
+<td><strong>Parquet</strong></td>
+<td><strong>~20 MB</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>→ Gain de taille : 5x plus compact que GeoJSON</strong></p>
+<hr />
+<h2 id="limite-importante-de-parquet">Limite importante de Parquet</h2>
+<p>⚠️ <strong>Parquet = format d'échange</strong></p>
+<ul>
+<li>Pas un format de travail</li>
+<li>Pas un format de traitement</li>
+<li>Nécessite un système optimisé pour l'exploiter</li>
+</ul>
+<p><strong>Solution : DuckDB</strong></p>
+<hr />
+<h1 id="02">02</h1>
+<h2 id="le-sgbd-duckdb-presentation-et-caracteristiques">Le SGBD DuckDB : présentation et caractéristiques</h2>
+<center>
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/DuckDB_logo.svg/960px-DuckDB_logo.svg.png" height="300">
+</center>
+
+<hr />
+<h2 id="quest-ce-que-duckdb">Qu'est-ce que DuckDB ?</h2>
+<p><strong>Système de gestion de base de données relationnelle (SGBDR)</strong></p>
+<ul>
+<li>Écrit en <strong>C++</strong></li>
+<li>Licence <strong>MIT</strong> (open source)</li>
+<li>Base de données en <strong>fichier portable</strong></li>
+<li>Version stable : <strong>1.4.4</strong></li>
+<li><strong>Sans serveur</strong> (serverless)</li>
+</ul>
+<hr />
+<h2 id="pourquoi-choisir-duckdb">Pourquoi choisir DuckDB ?</h2>
+<p>✅ <strong>Sans serveur (Serverless)</strong>
+- Pas de processus serveur à gérer
+- Configuration minimale</p>
+<p>✅ <strong>Installation rapide</strong>
+- Mise en place en quelques minutes</p>
+<p>✅ <strong>Fichier portable</strong>
+- Facilite le partage et la sauvegarde</p>
+<hr />
+<h2 id="pourquoi-choisir-duckdb-suite">Pourquoi choisir DuckDB ? (suite)</h2>
+<p>✅ <strong>Langage SQL standard</strong>
+- Facile si vous connaissez SQL
+- Nombreuses fonctions analytiques</p>
+<p>✅ <strong>Lecture directe de fichiers</strong>
+- Requêtes directes sur Parquet, CSV, etc.
+- Pas d'import nécessaire</p>
+<p>✅ <strong>Extension spatiale</strong>
+- Fonctions GIS basées sur GEOS
+- Compatible avec PostGIS</p>
+<hr />
+<h2 id="extension-spatiale-de-duckdb">Extension spatiale de DuckDB</h2>
+<p><strong>Fonctionnalités avancées pour le SIG :</strong></p>
+<ul>
+<li>Grande variété de fonctions spatiales (GEOS)</li>
+<li><strong>Noms identiques à PostGIS</strong> (migration facilitée)</li>
+<li><strong>Indexation spatiale</strong></li>
+<li>Lecture/écriture de nombreux formats</li>
+<li>Support des <strong>drivers GDAL</strong></li>
+</ul>
+<hr />
+<h2 id="installation-de-lextension-spatial">Installation de l'extension spatial</h2>
+<div class="highlight"><pre><span></span><code>INSTALL spatial; 
+</code></pre></div>
+<blockquote>
+<p>A faire qu'une seule fois sur le poste</p>
+</blockquote>
+<h2 id="chargement-de-lextension-spatial">Chargement de l'extension spatial</h2>
+<div class="highlight"><pre><span></span><code>LOAD spatial; 
+</code></pre></div>
+<blockquote>
+<p>Il s'agit de l'équivalent du <code>CREATE EXTENSION postgis</code> sur une base dans PostgreSQL</p>
+</blockquote>
+<hr />
+<h2 id="olap-vs-oltp">OLAP vs OLTP</h2>
+<p><strong>DuckDB est optimisé pour l'OLAP</strong></p>
+<p>https://fr.wikipedia.org/wiki/Traitement_analytique_en_ligne</p>
+<blockquote>
+<p>En informatique, et plus particulièrement dans le domaine des bases de données, le traitement analytique en ligne (anglais online analytical processing, OLAP) est un type d'application informatique orienté vers l'analyse sur-le-champ d'informations.</p>
+</blockquote>
+<ul>
+<li>OLAP: Traitement analytique en ligne (<em>online analytical processing</em>)</li>
+<li>OLTP: Traitement transactionnel en ligne (<em>online transaction processing</em>)</li>
+</ul>
+<hr />
+<h2 id="olap-vs-oltp_1">OLAP vs OLTP</h2>
+<table>
+<thead>
+<tr>
+<th>OLAP (DuckDB)</th>
+<th>OLTP (PostgreSQL)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Requêtes analytiques complexes</td>
+<td>Transactions rapides</td>
+</tr>
+<tr>
+<td>Lecture de gros volumes</td>
+<td>Nombreuses écritures</td>
+</tr>
+<tr>
+<td>Peu de mises à jour</td>
+<td>Mises à jour fréquentes</td>
+</tr>
+<tr>
+<td>Agrégations et analyses</td>
+<td>Intégrité transactionnelle</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="performance-architecture-colonnes">Performance : Architecture colonnes</h2>
+<p><strong>DuckDB excelle pour :</strong></p>
+<ul>
+<li>Traitement de <strong>grands volumes</strong> de données</li>
+<li>Données de <strong>plusieurs gigaoctets</strong></li>
+<li>Tables de <strong>plusieurs millions de lignes</strong></li>
+<li><strong>Requêtes analytiques</strong> et agrégations</li>
+</ul>
+<hr />
+<h2 id="benchmark-duckdb-vs-postgis">Benchmark : DuckDB vs PostGIS</h2>
+<p><strong>Données :</strong> 13,1 millions de bâtiments (GeoJSON 6,3 GB)</p>
+<table>
+<thead>
+<tr>
+<th>Opération</th>
+<th>DuckDB</th>
+<th>PostGIS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Intégration</td>
+<td>4 min</td>
+<td>5 min 30 s</td>
+</tr>
+<tr>
+<td>Calcul de buffer</td>
+<td><strong>38 s</strong></td>
+<td>1 min 54 s</td>
+</tr>
+<tr>
+<td>Ajout colonne + surface</td>
+<td><strong>2 s</strong></td>
+<td>2 min 58 s</td>
+</tr>
+</tbody>
+</table>
+<p>⚠️ <strong>DuckDB ne remplace pas PostGIS</strong>
+Ils ont des cas d'usage différents et complémentaires.</p>
+<hr />
+<h2 id="limitations-de-duckdb-12">Limitations de DuckDB (1/2)</h2>
+<p>❌ <strong>Pas de support des projections</strong></p>
+<ul>
+<li>Pas de transformation de systèmes de coordonnées</li>
+<li>Données doivent être dans la même projection</li>
+</ul>
+<p>❌ <strong>Mono-utilisateur et local</strong></p>
+<ul>
+<li>Usage local uniquement</li>
+<li>Pas de multi-utilisateurs simultanés</li>
+</ul>
+<p>❌ <strong>Verrouillage en lecture</strong></p>
+<ul>
+<li>Base verrouillée lors des lectures</li>
+</ul>
+<hr />
+<h2 id="limitations-de-duckdb-22">Limitations de DuckDB (2/2)</h2>
+<p>❌ <strong>Pas de gestion des droits</strong></p>
+<ul>
+<li>Pas de système de permissions</li>
+<li>Pas de gestion de rôles</li>
+</ul>
+<p>❌ <strong>Projet jeune</strong></p>
+<ul>
+<li>Évolution rapide</li>
+<li>API peut changer</li>
+</ul>
+<p>❌ <strong>OLAP uniquement</strong></p>
+<ul>
+<li>Pas pour : écritures fréquentes, transactions concurrentes, haute disponibilité</li>
+</ul>
+<hr />
+<h2 id="utilisation-de-duckdb">Utilisation de DuckDB</h2>
+<h3 id="interface-en-ligne-de-commande-cli">Interface en ligne de commande (CLI)</h3>
+<ul>
+<li><a href="https://duckdb.org/install/?platform=linux&amp;environment=cli">Linux</a>, <a href="https://duckdb.org/install/?platform=macos&amp;environment=cli">macOS</a>, <a href="https://duckdb.org/install/?platform=windows&amp;environment=cli">Windows</a></li>
+</ul>
+<h3 id="langages-de-programmation">Langages de programmation</h3>
+<ul>
+<li><a href="https://duckdb.org/install/?platform=linux&amp;environment=python">Python</a>, <a href="https://duckdb.org/install/?platform=linux&amp;environment=r">R</a>, Java, Node.js, Rust...</li>
+</ul>
+<h3 id="dans-qgis">Dans QGIS</h3>
+<ul>
+<li><a href="https://plugins.qgis.org/plugins/qduckdb/">QDuckDB</a></li>
+</ul>
+<hr />
+<h2 id="utilisation-de-duckdb_1">Utilisation de DuckDB</h2>
+<h3 id="ide">IDE</h3>
+<ul>
+<li>DBeaver</li>
+<li>DataGrip (freeware)</li>
+<li><a href="https://www.beekeeperstudio.io/fr/">Beekeeper Studio</a></li>
+</ul>
+<h3 id="web">Web</h3>
+<p>Permet grace à <a href="https://duckdb.org/docs/stable/clients/wasm/overview">DuckDB WASM</a>
+- <a href="https://shell.duckdb.org">DuckDB Shell</a>
+- <a href="https://demo.duckui.com/">DuckUI</a>
+- Avec la <a href="https://duckdb.org/docs/stable/core_extensions/ui">CLI</a> via <code>duckdb -ui</code></p>
+<hr />
+<h1 id="03">03</h1>
+<h2 id="cas-dusage-en-sig">Cas d'usage en SIG</h2>
+<hr />
+<h2 id="plugin-qduckdb-pour-qgis">Plugin QDuckDB pour QGIS</h2>
+<p><strong>Intégration de DuckDB dans QGIS</strong></p>
+<ul>
+<li>Développement financé par l'<strong>IFREMER</strong></li>
+<li>Mode <strong>lecture seule</strong> actuellement</li>
+<li>Chargement de couches depuis DuckDB</li>
+<li>Disponible dans le gestionnaire d'extensions QGIS</li>
+</ul>
+<p>📺 <a href="https://video.osgeo.org/w/1YGiDEgqK29RAo9TmtCjc1">Vidéo de démonstration</a></p>
+<hr />
+<h2 id="exemple-1-creer-une-table-geographique-depuis-un-csv">Exemple 1 : Créer une table géographique depuis un CSV</h2>
+<p><strong>Créer une couche spatiale depuis un CSV avec X,Y :</strong></p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span>
+<span class="w">    </span><span class="o">*</span><span class="p">,</span>
+<span class="w">    </span><span class="n">ST_Point</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">geometry</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;fichier.csv&#39;</span><span class="p">)</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="k">IS</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span>
+<span class="w">  </span><span class="k">AND</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="k">IS</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">;</span>
+</code></pre></div>
+<hr />
+<h2 id="exemple-2-conversion-shapefile-gpkg">Exemple 2 : Conversion Shapefile → GPKG</h2>
+<p><strong>Convertir un Shapefile en GeoPackage :</strong></p>
+<div class="highlight"><pre><span></span><code><span class="k">COPY</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">ST_Read</span><span class="p">(</span><span class="s1">&#39;input.shp&#39;</span><span class="p">)</span>
+<span class="p">)</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="s1">&#39;output.gpkg&#39;</span><span class="w"> </span>
+<span class="k">WITH</span><span class="w"> </span><span class="p">(</span><span class="n">FORMAT</span><span class="w"> </span><span class="n">GDAL</span><span class="p">,</span><span class="w"> </span><span class="n">DRIVER</span><span class="w"> </span><span class="s1">&#39;GPKG&#39;</span><span class="p">);</span>
+</code></pre></div>
+<hr />
+<h2 id="exemple-3-parquet-shapefile-avec-filtre">Exemple 3 : Parquet → Shapefile avec filtre</h2>
+<p><strong>Créer un Shapefile depuis Parquet avec filtre spatial :</strong></p>
+<div class="highlight"><pre><span></span><code><span class="k">COPY</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span>
+<span class="w">    </span><span class="k">FROM</span><span class="w"> </span><span class="n">read_parquet</span><span class="p">(</span><span class="s1">&#39;data.parquet&#39;</span><span class="p">)</span>
+<span class="w">    </span><span class="k">WHERE</span><span class="w"> </span><span class="n">ST_Within</span><span class="p">(</span>
+<span class="w">        </span><span class="n">geometry</span><span class="p">,</span>
+<span class="w">        </span><span class="n">ST_MakeEnvelope</span><span class="p">(</span><span class="n">xmin</span><span class="p">,</span><span class="w"> </span><span class="n">ymin</span><span class="p">,</span><span class="w"> </span><span class="n">xmax</span><span class="p">,</span><span class="w"> </span><span class="n">ymax</span><span class="p">)</span>
+<span class="w">    </span><span class="p">)</span>
+<span class="p">)</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="s1">&#39;filtered.shp&#39;</span><span class="w"> </span>
+<span class="k">WITH</span><span class="w"> </span><span class="p">(</span><span class="n">FORMAT</span><span class="w"> </span><span class="n">GDAL</span><span class="p">,</span><span class="w"> </span><span class="n">DRIVER</span><span class="w"> </span><span class="s1">&#39;ESRI Shapefile&#39;</span><span class="p">);</span>
+</code></pre></div>
+<hr />
+<h2 id="generation-de-tuiles-vectorielles">Génération de tuiles vectorielles</h2>
+<p><strong>Nouveauté depuis DuckDB 1.4</strong></p>
+<p>✅ <strong>Avantages :</strong>
+- Performance élevée pour la génération de tuiles
+- Intégration facile dans des pipelines
+- Alternative légère aux solutions traditionnelles</p>
+<p>📂 <a href="https://gist.github.com/Maxxen/37e4a9f8595ea5e6a20c0c8fbbefe955">Exemple par Max Gabrielsson</a></p>
+<hr />
+<h1 id="04">04</h1>
+<h2 id="complementarite-parquet-duckdb">Complémentarité Parquet + DuckDB</h2>
+<hr />
+<h2 id="le-duo-gagnant">Le duo gagnant</h2>
+<p><strong>Format ouvert (Parquet)</strong>
+- Stockage compact
+- Compression efficace
+- Portabilité</p>
+<p><strong>+</strong></p>
+<p><strong>Base de données in-process (DuckDB)</strong>
+- Requêtes SQL puissantes
+- Performance élevée
+- Facilité d'utilisation</p>
+<p><strong>= Efficacité maximale</strong></p>
+<hr />
+<h2 id="workflow-recommande">Workflow recommandé</h2>
+<p><strong>1. Stockage en Parquet</strong>
+- Compression et archivage
+- Partage et échange de données</p>
+<p><strong>2. Traitement avec DuckDB</strong>
+- Analyses et requêtes complexes
+- Transformations et conversions</p>
+<p><strong>3. Export vers format métier</strong>
+- GeoPackage pour QGIS
+- Shapefile pour compatibilité
+- GeoJSON pour le web
+- PostgreSQL/PostGIS pour production</p>
+<hr />
+<h2 id="cas-dusage-ideaux">Cas d'usage idéaux ✅</h2>
+<p><strong>DuckDB + Parquet est parfait pour :</strong></p>
+<ul>
+<li>Analyse exploratoire de données (EDA)</li>
+<li>Prototypage rapide d'analyses spatiales</li>
+<li>Traitement batch de grandes données</li>
+<li>Conversions de formats en masse</li>
+<li>Génération de rapports analytiques</li>
+<li>Scripts ETL</li>
+<li>Travail en local sur données volumineuses</li>
+<li>Recherche et développement</li>
+</ul>
+<hr />
+<h2 id="cas-dusage-a-eviter">Cas d'usage à éviter ❌</h2>
+<p><strong>Ne PAS utiliser pour :</strong></p>
+<ul>
+<li>Applications web avec accès concurrent</li>
+<li>Systèmes nécessitant haute disponibilité</li>
+<li>Applications transactionnelles (CRUD intensif)</li>
+<li>Cas nécessitant gestion fine des droits utilisateurs</li>
+</ul>
+<hr />
+<h1 id="05">05</h1>
+<h2 id="conclusion">Conclusion</h2>
+<hr />
+<h2 id="points-cles-a-retenir">Points clés à retenir</h2>
+<ol>
+<li><strong>Parquet</strong> : format de stockage efficace pour grandes données</li>
+<li><strong>DuckDB</strong> : SGBD performant pour l'analyse volumineuse</li>
+<li><strong>Extension spatiale</strong> : capacités GIS avancées</li>
+<li><strong>Parquet + DuckDB</strong> : duo idéal pour l'analyse géospatiale</li>
+<li><strong>Complémentarité</strong> : ne remplace pas PostgreSQL/PostGIS </li>
+</ol>
+<hr />
+<h2 id="perspectives">Perspectives</h2>
+<p><strong>DuckDB est un projet jeune et dynamique</strong></p>
+<ul>
+<li>Évolution rapide</li>
+<li>Écosystème grandissant</li>
+<li>Nouvelles fonctionnalités régulières</li>
+<li>Intégrations multiples</li>
+</ul>
+<p><strong>→ Un outil à surveiller de près dans le domaine géospatial</strong></p>
+<hr />
+<h2 id="site-documentation-officielle">Site &amp; Documentation officielle</h2>
+<table>
+<thead>
+<tr>
+<th>Ressource</th>
+<th>Lien</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>🏠 Site officiel</td>
+<td><a href="https://duckdb.org">duckdb.org</a></td>
+</tr>
+<tr>
+<td>📖 Documentation</td>
+<td><a href="https://duckdb.org/docs">duckdb.org/docs</a></td>
+</tr>
+<tr>
+<td>🗺️ Extension spatiale</td>
+<td><a href="https://duckdb.org/docs/extensions/spatial">docs/extensions/spatial</a></td>
+</tr>
+<tr>
+<td>💻 GitHub</td>
+<td><a href="https://github.com/duckdb/duckdb">duckdb/duckdb</a></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="outils-plugins">Outils &amp; Plugins</h2>
+<ul>
+<li>
+<p><strong>Awesome DuckDB</strong> — Une liste sélectionnée de bibliothèques, d'outils et de ressources DuckDB<br />
+  → <a href="https://github.com/davidgasquez/awesome-duckdb">github.com/davidgasquez/awesome-duckdb</a></p>
+</li>
+<li>
+<p><strong>Plugin QGIS QDuckDB</strong> — Intégration native de DuckDB dans QGIS<br />
+  → <a href="https://plugins.qgis.org/plugins/qduckdb/">plugins.qgis.org/plugins/qduckdb</a></p>
+</li>
+<li>
+<p><strong>GeoParquet.io</strong> — Outils de transformation rapides pour les fichiers GeoParquet utilisant PyArrow et DuckDB<br />
+  → <a href="https://geoparquet.io/">geoparquet.io</a></p>
+</li>
+</ul>
+<hr />
+<h2 id="articles-tutoriels">📚 Articles &amp; Tutoriels</h2>
+<h3 id="geotribu">Géotribu</h3>
+<ul>
+<li><strong>DuckDB et données spatiales</strong><br />
+  → <a href="https://geotribu.fr/articles/2023/2023-12-19_duckdb-donnees-spatiales/">geotribu.fr — DuckDB données spatiales</a></li>
+</ul>
+<h3 id="icem7-serie-duckdb">icem7 — Série DuckDB</h3>
+<ul>
+<li><strong>Parquet devrait remplacer le format CSV</strong><br />
+  → <a href="https://www.icem7.fr/cartographie/parquet-devrait-remplacer-le-format-csv/">icem7.fr/cartographie/parquet-devrait-remplacer-le-format-csv</a></li>
+</ul>
+<hr />
+<ul>
+<li><strong>3 explorations bluffantes avec DuckDB</strong> <em>(série en 3 parties)</em></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Épisode</th>
+<th>Thème</th>
+<th>Lien</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1/3</td>
+<td>Interroger des fichiers distants</td>
+<td><a href="https://www.icem7.fr/pedagogie/3-explorations-bluffantes-avec-duckdb-1-interroger-des-fichiers-distants/">lien</a></td>
+</tr>
+<tr>
+<td>2/3</td>
+<td>Butiner des API JSON</td>
+<td><a href="https://www.icem7.fr/pedagogie/3-explorations-bluffantes-avec-duckdb-butiner-des-api-json-2-3/">lien</a></td>
+</tr>
+<tr>
+<td>3/3</td>
+<td>Croiser les requêtes spatiales</td>
+<td><a href="https://www.icem7.fr/cartographie/3-explorations-bluffantes-avec-duckdb-croiser-les-requetes-spatiales-3-3/">lien</a></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Comment bien préparer son Parquet</strong><br />
+  → <a href="https://www.icem7.fr/outils/comment-bien-preparer-son-parquet/">icem7.fr/outils/comment-bien-preparer-son-parquet</a></li>
+</ul>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.hide", "navigation.instant", "navigation.instant.progress", "navigation.sections", "navigation.tabs", "navigation.tabs.sticky", "navigation.top", "navigation.tracking", "toc.follow", "toc.integrate", "content.code.copy"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
